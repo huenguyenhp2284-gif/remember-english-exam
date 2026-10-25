@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Remember English</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../imgandvd/favicon-16x16.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body> 
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h2>Remember English</h2> 
+            </div>
+            <ul class="nav-links">
+                <li><a href="./gioithieu.html" class="btn-nav-login">giới thiệu</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="login-box">
+        <div class="auth-tabs">
+            <a href="./login.html" class="tab-link active">Đăng nhập</a>
+            <a href="./dangki.html" class="tab-link">Đăng ký</a>
+        </div>
+
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Địa chỉ Email" required>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Mật khẩu" required>
+            </div>
+
+            <button type="submit" class="btn-signin" id="btn-submit">Đăng nhập</button>
+            
+            <div class="form-help">
+                <span>Chưa có tài khoản? <a href="./dangki.html" class="need-help" style="color: #7a16df; font-weight: bold;">Đăng ký ngay</a></span>
+            </div>
+        </form>
+    </div>
+   
+    
+    <script type="module" src="../js/login.js"></script>
+</body>
+</html>

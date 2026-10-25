@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài Khoản Của Tôi - Remember English</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/account.css">
+    <link rel="icon" type="image/png" sizes="16x16" href="../imgandvd/favicon-16x16.png">
+</head>
+<body>
+     <nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <h2>Remember English</h2>
+        </div>
+        <ul class="nav-links">
+            <!-- Các thẻ tag liên kết cuộn trang -->
+            <li><a href="#profile-section">Thông tin cá nhân</a></li>
+            <li><a href="#selling-section">Mặt hàng bạn bán</a></li>
+            <li><a href="#bought-section">Đơn hàng bạn mua</a></li>
+            <li><a href="../index.html" class="btn-back">⬅ Trang Chủ</a></li>
+        </ul>
+        <div class="nav-user">
+            <button id="user-btn" class="btn-user">
+                <i class="fas fa-user-circle"></i>
+                <span id="username">Guest</span>
+            </button>
+            
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main class="container">
+    <!-- 1. PHẦN CHỈNH SỬA THÔNG TIN -->
+    <section id="profile-section" class="account-card">
+        <h2><i class="fas fa-user-edit"></i> Chỉnh Sửa Thông Tin Cá Nhân</h2>
+        <form id="profile-form">
+            <div class="form-group">
+                <label>Email (Không thể thay đổi):</label>
+                <input type="email" id="acc-email" disabled>
+            </div>
+            <div class="form-group">
+                <label>Tên hiển thị / Username:</label>
+                <input type="text" id="acc-username" placeholder="Nhập tên mới..." required>
+            </div>
+            <div class="form-group">
+                <label>Số điện thoại:</label>
+                <input type="tel" id="acc-phone" placeholder="Nhập số điện thoại...">
+            </div>
+            <div class="form-group">
+                <label>Địa chỉ mặc định:</label>
+                <textarea id="acc-address" rows="2" placeholder="Nhập địa chỉ giao hàng..."></textarea>
+            </div>
+            <button type="submit" id="btn-save-profile" class="btn-primary">💾 Lưu Thay Đổi</button>
+        </form>
+    </section>
+
+    <!-- 2. PHẦN MẶT HÀNG BẠN ĐANG ĐĂNG BÁN -->
+    <section id="selling-section" class="account-card">
+        <h2><i class="fas fa-store"></i> Mặt Hàng Bạn Đang Bán</h2>
+        <div id="selling-products-list" class="item-grid">
+            <p class="loading-text">Đang tải danh sách sản phẩm...</p>
+        </div>
+        <a href="./sell.html" class="btn-secondary"><i class="fas fa-plus"></i> Đăng bán thêm sản phẩm</a>
+    </section>
+
+    <!-- 3. PHẦN MẶT HÀNG BẠN ĐÃ MUA / ĐẶT HÀNG -->
+    <section id="bought-section" class="account-card">
+        <h2><i class="fas fa-shopping-bag"></i> Đơn Hàng Bạn Đã Mua</h2>
+        <div id="bought-orders-list" class="orders-list">
+            <p class="loading-text">Đang tải lịch sử mua hàng...</p>
+        </div>
+    </section>
+</main>
+
+     <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-info">
+                <h3>Remember English</h3>
+                <p>Nền tảng hỗ trợ học tiếng Anh toàn diện qua các kỹ năng Nghe, Nói, Đọc, Viết một cách bài bản và hiệu quả.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4 style="margin-bottom: 15px;"></h4>
+                <ul>
+                    <li><a href="./listen.html">Nghe (Listen)</a></li>
+                    <li><a href="./read.html">Đọc (read)</a></li>
+                    <li><a href="./write.html">sách</a></li>
+                </ul>  
+            </div>
+            <div class="footer-contact">
+                <h4 style="margin-bottom: 15px;">Liên hệ</h4>
+                <p><i class="fas fa-envelope"></i>huenguyenhp2284@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +0916949916</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 Remember English. Lê Hoàng Ân.
+        </div>
+    </footer>
+     <script>
+(function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...args)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="MPcFgZFdOhyBhtnvoYb4I";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
+</script>
+
+    <script type="module" src="../js/account.js"></script>
+</body>
+</html>

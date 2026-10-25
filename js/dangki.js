@@ -1,0 +1,80 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, doc, setDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { firebaseConfig } from "./firebase-config.js";
+
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const registerForm = document.querySelector("#registerForm") || document.querySelector("form");
+
+if (registerForm) {
+  registerForm.addEventListener("submit", async (e) => {
+    e.preventDefault(); 
+
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirmPassword");
+    const btnSubmit = registerForm.querySelector("button[type='submit']") || document.getElementById("btn-submit");
+
+    const username = usernameInput?.value.trim() || "";
+    const email = emailInput?.value.trim() || "";
+    const password = passwordInput?.value.trim() || "";
+    const confirmPassword = confirmPasswordInput?.value.trim() || password;
+
+    // 1. Kiểm tra dữ liệu đầu vào
+    if (!email || !password) {
+      alert("Vui lòng điền đầy đủ Email và Mật khẩu!");
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      alert("Mật khẩu xác nhận không khớp!");
+      return;
+    }
+
+    // 2. Tắt nút Đăng ký để tránh bấm đúp 
+    if (btnSubmit) {
+      btnSubmit.disabled = true;
+      btnSubmit.textContent = "⏳ Đang tạo tài khoản...";
+    }
+
+    try {
+      // 3. Tạo tài khoản trên Firebase Authentication
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // 4. Lưu thông tin người dùng vào Firestore collection "users"
+      await setDoc(doc(db, "users", user.uid), {
+        username: username || email.split("@")[0],
+        email: email,
+        role_id: 2, // 1: Admin, 2: User / Guest
+        createdAt: serverTimestamp()
+      });
+
+      alert("🎉 Đăng ký thành công!");
+      window.location.href = "../html/login.html"; // Chuyển sang trang Đăng nhập
+    } catch (error) {
+      console.error("Lỗi đăng ký:", error);
+
+      if (error.code === "auth/email-already-in-use") {
+        alert("Email này đã được đăng ký rồi! Hãy thử email khác hoặc chuyển sang Đăng nhập.");
+      } else if (error.code === "auth/weak-password") {
+        alert("Mật khẩu quá yếu! Vui lòng nhập từ 6 ký tự trở lên.");
+      } else if (error.code === "auth/invalid-email") {
+        alert("Định dạng Email không hợp lệ!");
+      } else {
+        alert("Đăng ký thất bại: " + error.message);
+      }
+    } finally {
+      // 5. Mở lại nút Đăng ký nếu xử lý xong hoặc bị lỗi
+      if (btnSubmit) {
+        btnSubmit.disabled = false;
+        btnSubmit.textContent = "Đăng ký";
+      }
+    }
+  });
+}
